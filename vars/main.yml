@@ -1,5 +1,6 @@
 ---
 
+result:
 accessible_os_name: ""
 accessible_os_version: ""
 accessible_ssh_port: "22"

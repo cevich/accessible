@@ -28,3 +28,9 @@
     that:
         - 'accessible_os_name | trim | length'
         - 'accessible_os_version | trim | length'
+
+- name: The accessible_os_name and accessible_os_version values are debugged
+  debug:
+    msg: >
+        accessible_os_name '{{ accessible_os_name }}'
+        accessible_os_version '{{ accessible_os_version }}'

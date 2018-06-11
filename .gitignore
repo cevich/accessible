@@ -1,6 +1,9 @@
 # Ansible cruft
 *.retry
 *.swp
+# Dropped during CI tests
+tests/ansible.cfg
+tests/roles/cevich.subscribed/
 # Downloaded during CI tests
 .travis_typo_check.sh
 tests/test_vault.yml
