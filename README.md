@@ -1,7 +1,7 @@
 Accessable
 =========
 
-[Ansible Galaxy enabled](https://galaxy.ansible.com/cevich/accessable)
+[Ansible Galaxy enabled](https://galaxy.ansible.com/cevich/accessible)
 role to wait for a host to boot, then make sure any low-level Ansible
 or system requirements are taken care of.  Finally, it makes an explicit
 call to the setup module for fact-gathering.
@@ -14,24 +14,24 @@ Same as stock Ansible ``2.3+``.
 Role Variables
 --------------
 
-``accessable_cmd``:
+``accessible_cmd``:
     The command, when executed successfully on the subject-host, signals
     availability and readiness.  Defaults to ``/bin/true``.
 
-``accessable_retries``:
-    The number of times to retry ``accessable_cmd`` before failing
-    subject host.  Also see ``accessable_delay`` below.  Defaults to ``20``.
+``accessible_retries``:
+    The number of times to retry ``accessible_cmd`` before failing
+    subject host.  Also see ``accessible_delay`` below.  Defaults to ``20``.
 
-``accessable_delay``:
-    The number of seconds to wait between each retry of ``accessable_cmd``.
+``accessible_delay``:
+    The number of seconds to wait between each retry of ``accessible_cmd``.
     Defaults to ``5``.
 
-``accessable_ansible_deps``:
+``accessible_ansible_deps``:
     Lookup table of Ansible dependency installation commands per OS and
     major version.  The lookup is based upon the contents of ``/etc/os-release``
     If no match is found, the ``default`` key is used.
 
-``accessable_gather_subset``:
+``accessible_gather_subset``:
     After any dependencies are installed, the ``setup`` module will run to gather
     subject-host facts.  This value limits collection to a subset of fact
     plugins.  Defaults to 'network'.
@@ -52,7 +52,7 @@ Example Playbook
     - hosts: all
       gather_facts: False
       roles:
-        - accessable
+        - accessible
 ```
 
 License
@@ -84,4 +84,4 @@ Causing trouble and inciting mayhem with Linux since Windows 98
 Continuous Integration
 ----------------------
 
-Travis CI: [![Build Status](https://travis-ci.org/cevich/accessable.svg?branch=master)](https://travis-ci.org/cevich/accessable)
+Travis CI: [![Build Status](https://travis-ci.org/cevich/accessible.svg?branch=master)](https://travis-ci.org/cevich/accessible)

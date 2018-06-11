@@ -1,16 +1,16 @@
 ---
 
 # When successful, this command signals the subject host is ready for further commands
-accessable_cmd: '/bin/true'
+accessible_cmd: '/bin/true'
 
-# The number of times to retry accessable_cmd before failing subject host
-accessable_retries: 20
+# The number of times to retry accessible_cmd before failing subject host
+accessible_retries: 20
 
 # The amount of time between retries to wait
-accessable_delay: 5
+accessible_delay: 5
 
 # Table of command(s) that will install ansible dependencies depending on os type and version
-accessable_ansible_deps:
+accessible_ansible_deps:
     default: "python --version"
     rhel:
         "6": 'yum install -y libselinux-python rsync'
@@ -26,5 +26,5 @@ accessable_ansible_deps:
         "18": 'apt-get -qq update && apt-get -qq install python python-simplejson rsync'
 
 # String to use for 'gather_subset' argument to setup module
-accessable_gather_subset: 'network'
+accessible_gather_subset: 'network'
 

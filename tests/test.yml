@@ -6,6 +6,6 @@
   vars_files:
     - '{{ playbook_dir }}/test_vault.yml'
   roles:
-    - role: cevich.accessable
+    - role: cevich.accessible
       vars:
         rhsm: '{{ _vault_rhsm if ansible_host == "subtest" else {} }}'
