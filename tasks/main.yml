@@ -1,6 +1,6 @@
 ---
 
-- include: accessable.yml
+- include: accessible.yml
 
 - include: os_detection.yml
 
@@ -8,7 +8,7 @@
   import_role:
     name: cevich.subscribed
     private: True
-  when: accessable_os_name == 'rhel' and
+  when: accessible_os_name == 'rhel' and
         rhsm | default({}, True) | length and
         rhsm.username | default("", True) | trim | length and
         rhsm.password | default("", True) | trim | length

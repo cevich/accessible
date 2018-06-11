@@ -14,16 +14,16 @@
 
     - include: clear_result.yml
 
-    - name: "Command is buffered from accessable_ansible_deps lookup table"
+    - name: "Command is buffered from accessible_ansible_deps lookup table"
       set_fact:
-        result: '{{ accessable_ansible_deps[accessable_os_name][accessable_os_version] }}'
-      when: accessable_os_name in accessable_ansible_deps and
-            accessable_os_version in accessable_ansible_deps[accessable_os_name]
+        result: '{{ accessible_ansible_deps[accessible_os_name][accessible_os_version] }}'
+      when: accessible_os_name in accessible_ansible_deps and
+            accessible_os_version in accessible_ansible_deps[accessible_os_name]
 
     - name: "Either the buffered command or the default is executed"
-      raw: '{{ result | default(accessable_ansible_deps["default"], True) }}'
-      when: accessable_ansible_deps["default"] | trim | length
+      raw: '{{ result | default(accessible_ansible_deps["default"], True) }}'
+      when: accessible_ansible_deps["default"] | trim | length
 
     - name: Host facts are gathered after dependencies satisfied
       setup:
-        gather_subset: '{{ accessable_gather_subset }}'
+        gather_subset: '{{ accessible_gather_subset }}'

@@ -1,7 +1,7 @@
 ---
 
-accessable_os_name: ""
-accessable_os_version: ""
-accessable_ssh_port: "22"
-accessable_ssh_types: ['smart', 'ssh', 'paramiko']
-accessable_wait_for_delegate: "localhost"
+accessible_os_name: ""
+accessible_os_version: ""
+accessible_ssh_port: "22"
+accessible_ssh_types: ['smart', 'ssh', 'paramiko']
+accessible_wait_for_delegate: "localhost"
