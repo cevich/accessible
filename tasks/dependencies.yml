@@ -1,0 +1,29 @@
+---
+
+- include: clear_result.yml
+
+- name: Host facts gather successfully when depds are already met.
+  setup:
+    gather_subset: min
+  failed_when: False
+  ignore_errors: True
+  register: result
+
+- when: result is failed
+  block:
+
+    - include: clear_result.yml
+
+    - name: "Command is buffered from accessable_ansible_deps lookup table"
+      set_fact:
+        result: '{{ accessable_ansible_deps[accessable_os_name][accessable_os_version] }}'
+      when: accessable_os_name in accessable_ansible_deps and
+            accessable_os_version in accessable_ansible_deps[accessable_os_name]
+
+    - name: "Either the buffered command or the default is executed"
+      raw: '{{ result | default(accessable_ansible_deps["default"], True) }}'
+      when: accessable_ansible_deps["default"] | trim | length
+
+    - name: Host facts are gathered after dependencies satisfied
+      setup:
+        gather_subset: '{{ accessable_gather_subset }}'

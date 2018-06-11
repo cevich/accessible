@@ -1,0 +1,7 @@
+---
+
+accessable_os_name: ""
+accessable_os_version: ""
+accessable_ssh_port: "22"
+accessable_ssh_types: ['smart', 'ssh', 'paramiko']
+accessable_wait_for_delegate: "localhost"

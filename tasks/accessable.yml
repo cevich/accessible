@@ -1,0 +1,33 @@
+---
+
+- include: clear_result.yml
+
+- block:
+    - name: "Host's ssh port is open from perspective of {{ accessable_wait_for_delegate }}"
+      wait_for:
+        host: "{{ ansible_host }}"
+        port: "{{ ansible_port | default(accessable_ssh_port) }}"
+        # Fail quickly == retry sooner
+        connect_timeout: 1
+        # Minumum is two-DNS failures + one second
+        timeout: "{{ accessable_retries | int * accessable_delay | int }}"
+        state: "started"
+      delegate_to: '{{ accessable_wait_for_delegate }}'
+      register: result
+      until: result | success
+      retries: '{{ accessable_retries }}'
+      delay: '{{ accessable_delay }}'
+      when: ansible_connection in accessable_ssh_types
+
+    - name: "Ansible accessability command executes successfully"
+      raw: '{{ accessable_cmd }}'  # raw has no subject-host dependencies
+      changed_when: False  # inspection only
+      register: result
+      until: result | success
+      retries: '{{ accessable_retries }}'
+      delay: '{{ accessable_delay }}'
+
+  rescue:
+    - name: "Failure result of accessable_cmd is debugged"
+      debug:
+        var: result.results[-1]  # Last one must have failed

@@ -1,0 +1,5 @@
+---
+
+- name: The temporary result fact is empty
+  set_fact:
+    result: ""

@@ -1,0 +1,22 @@
+---
+
+sudo: required
+language: python
+python:
+    - 2.7
+branch:
+    only:
+        - master
+services:
+    - docker
+
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq realpath
+  - pip install ansible>=2.3
+
+script:
+  - ./.travis.sh
+
+notifications:
+    webhooks: https://galaxy.ansible.com/api/v1/notifications/

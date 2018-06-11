@@ -1,0 +1,6 @@
+# Ansible cruft
+*.retry
+*.swp
+# Downloaded during CI tests
+.travis_typo_check.sh
+tests/test_vault.yml

@@ -1,0 +1,30 @@
+---
+
+- include: clear_result.yml
+
+- name: "The contents of /etc/os-release file are buffered temporarily"
+  raw: "cat /etc/os-release || true"
+  changed_when: False  # Just looking
+  register: result
+
+- name: "The temporary buffer is divided by lines"
+  set_fact:
+    result: '{{ result.stdout_lines if result | trim | length else [] }}'
+
+- name: "The accessable_os_name fact is defined from temporary buffer contents"
+  set_fact:
+    accessable_os_name: '{{ item | regex_replace("^ID=\W*(\w+)\W*", "\1") }}'
+  when: not accessable_os_name | trim | length and item | search('^ID=')
+  with_items: '{{ result }}'
+
+- name: "The accessable_os_version fact is defined from temporary buffer contents"
+  set_fact:
+    accessable_os_version: '{{ item | regex_replace("^VERSION_ID=\D*([0-9]+).*", "\1") }}'
+  when: not accessable_os_version | trim | length and item | search('^VERSION_ID=')
+  with_items: '{{ result }}'
+
+- name: "Both accessable_os_name and accessable_os_version are non-empty"
+  assert:
+    that:
+        - 'accessable_os_name | trim | length'
+        - 'accessable_os_version | trim | length'

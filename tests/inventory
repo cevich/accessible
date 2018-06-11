@@ -1,0 +1,4 @@
+subtest ansible_connection=docker ansible_host=subtest
+centos ansible_connection=docker ansible_host=centos
+fedora ansible_connection=docker ansible_host=fedora
+ubuntu ansible_connection=docker ansible_host=ubuntu

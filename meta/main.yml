@@ -1,0 +1,23 @@
+---
+
+galaxy_info:
+  author: Chris Evich
+  description: Wait for, and make ready, a Fedora, Ubuntu, CentOS, or RHEL subject host.
+  company: Red Hat
+  license: GPLv3
+  min_ansible_version: 2.3
+  platforms:
+    - name: all
+      versions:
+        - all
+  galaxy_tags:
+    - RHN
+    - RHSM
+    - SAM
+    - Subscription
+    - System
+    - Ansible
+    - Dependencies
+    - Management
+
+dependencies: []
