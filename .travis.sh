@@ -8,7 +8,7 @@ export CONTAINER="${CONTAINER:-docker}"
 cd $(dirname $0)
 curl -O https://raw.githubusercontent.com/cevich/ADEPT/master/.travis_typo_check.sh
 chmod +x ./.travis_typo_check.sh
-#TODO: Won't work for initial commit [[ -z "$CI" ]] || ./.travis_typo_check.sh
+[[ -z "$CI" ]] || ./.travis_typo_check.sh
 
 cd tests
 curl -O https://raw.githubusercontent.com/cevich/subscribed/master/tests/test_vault.yml
