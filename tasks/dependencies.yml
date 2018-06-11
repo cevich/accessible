@@ -1,15 +1,13 @@
 ---
 
-- include: clear_result.yml
-
-- name: Host facts gather successfully when depds are already met.
+- name: Attempt to retrieve facts, ignoring any errors
   setup:
     gather_subset: min
-  failed_when: False
   ignore_errors: True
-  register: result
+  when: ansible_local is undefined
 
-- when: result is failed
+- when: ansible_local is undefined or
+        not ansible_local.accessible_deps_cmd_was_run | default(False, True) | bool
   block:
 
     - include: clear_result.yml
@@ -20,10 +18,24 @@
       when: accessible_os_name in accessible_ansible_deps and
             accessible_os_version in accessible_ansible_deps[accessible_os_name]
 
+    - name: The lookup result is debugged
+      debug: var=result
+
     - name: "Either the buffered command or the default is executed"
       raw: '{{ result | default(accessible_ansible_deps["default"], True) }}'
       when: accessible_ansible_deps["default"] | trim | length
+      register: result
 
-    - name: Host facts are gathered after dependencies satisfied
+    - name: The Ansible local-facts directory exists to record role-state.
+      file:
+        path: /etc/ansible/facts.d
+        state: directory
+
+    - name: The role-state is recorded
+      copy:
+        dest: /etc/ansible/facts.d/accessible_deps_cmd_was_run.fact
+        content: "true"
+
+    - name: Host facts are re-gathered after dependencies satisfied
       setup:
         gather_subset: '{{ accessible_gather_subset }}'

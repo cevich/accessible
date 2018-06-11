@@ -74,7 +74,7 @@ do
 done
 
 echo "Testing functionality"
-ansible-playbook -i inventory test.yml
+ansible-playbook -i inventory test.yml # --verbose
 
 echo "Testing idempotence based on functionality test"
 ansible-playbook -i inventory test.yml | tee "$OUTPUT_TEMP_FILE"
