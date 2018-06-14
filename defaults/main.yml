@@ -10,20 +10,23 @@ accessible_retries: 20
 accessible_delay: 5
 
 # Table of command(s) that will install ansible dependencies depending on os type and version
+_typ_rhel_deps: 'libselinux-python policycoreutils-python rsync'
+_typ_fed_deps: 'python-simplejson python2-dnf libselinux-python python2-policycoreutils rsync'
+_typ_deb_deps: 'python python-simplejson rsync'
 accessible_ansible_deps:
     default: "python --version"
     rhel:
-        "6": 'yum install -y libselinux-python rsync'
-        "7": 'yum install -y libselinux-python rsync'
+        "6": 'yum install -y {{ _typ_rhel_deps }}'
+        "7": 'yum install -y {{ _typ_rhel_deps }}'
     centos:
-        "6": 'yum install -y libselinux-python rsync'
-        "7": 'yum install -y libselinux-python rsync'
+        "6": 'yum install -y {{ _typ_rhel_deps }}'
+        "7": 'yum install -y {{ _typ_rhel_deps }}'
     fedora:
-        "27": 'dnf install -y python-simplejson python2-dnf libselinux-python rsync'
-        "28": 'dnf install -y python-simplejson python2-dnf libselinux-python rsync'
+        "27": 'dnf install -y {{ _typ_fed_deps }}'
+        "28": 'dnf install -y {{ _typ_fed_deps }}'
     ubuntu:
-        "17": 'apt-get -qq update && apt-get -qq install python python-simplejson rsync'
-        "18": 'apt-get -qq update && apt-get -qq install python python-simplejson rsync'
+        "17": 'apt-get -qq update && apt-get -qq install {{ _typ_deb_deps }}'
+        "18": 'apt-get -qq update && apt-get -qq install {{ _typ_deb_deps }}'
 
 # String to use for 'gather_subset' argument to setup module
 accessible_gather_subset: 'network'
