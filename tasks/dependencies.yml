@@ -35,7 +35,3 @@
       copy:
         dest: /etc/ansible/facts.d/accessible_deps_cmd_was_run.fact
         content: "true"
-
-    - name: Host facts are re-gathered after dependencies satisfied
-      setup:
-        gather_subset: '{{ accessible_gather_subset }}'
