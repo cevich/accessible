@@ -14,3 +14,7 @@
         rhsm.password | default("", True) | trim | length
 
 - include: dependencies.yml
+
+- name: Host facts are re-gathered after dependencies satisfied
+  setup:
+    gather_subset: '{{ accessible_gather_subset }}'
