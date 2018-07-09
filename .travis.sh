@@ -35,6 +35,11 @@ cleanup(){
 }
 trap cleanup EXIT
 
+mkdir -p roles
+cd roles
+ln -s ../../ cevich.accessible
+cd ..
+
 export ANSIBLE_CONFIG="$PWD/ansible.cfg"
 cat << EOF > ansible.cfg
 [defaults]
@@ -43,6 +48,7 @@ vault_password_file = $ANSIBLE_VAULT_PASSWORD_FILE
 display_skipped_hosts = False
 any_errors_fatal = True
 deprecation_warnings = False
+force_color = 1
 EOF
 
 sudo $CONTAINER run --detach --name "subtest" docker.io/cevich/test_rhsm sleep 1h
