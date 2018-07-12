@@ -3,7 +3,8 @@
 *.swp
 # Dropped during CI tests
 tests/ansible.cfg
-tests/roles/cevich.subscribed/
+tests/roles
+tests/ssh*key*
 # Downloaded during CI tests
 .travis_typo_check.sh
 tests/test_vault.yml

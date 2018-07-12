@@ -3,6 +3,12 @@
 result:
 accessible_os_name: ""
 accessible_os_version: ""
-accessible_ssh_port: "22"
 accessible_ssh_types: ['smart', 'ssh', 'paramiko']
-accessible_wait_for_delegate: "localhost"
+
+# Shortcuts for accessible_ansible_deps values for common distros
+_typ_rhel_deps: 'libselinux-python policycoreutils-python rsync'
+_typ_fed_deps: 'python-simplejson python2-dnf libselinux-python python2-policycoreutils rsync'
+_typ_deb_deps: 'python python-simplejson rsync'
+
+_accessible_ssh_ports: []
+_accessible_async_results: []

@@ -2,10 +2,28 @@
 
 - hosts: all
   gather_facts: False
-  strategy: linear
   vars_files:
     - '{{ playbook_dir }}/test_vault.yml'
   roles:
     - role: cevich.accessible
       vars:
         rhsm: '{{ _vault_rhsm if ansible_host == "subtest" else {} }}'
+
+- hosts: foobar
+  gather_facts: False
+  tasks:
+    - assert: that='ansible_port == foobar_port'
+
+# Verify wait_for.sh works with a single port
+- hosts: foobar
+  gather_facts: False
+  vars_files:
+    - '{{ playbook_dir }}/test_vault.yml'
+  vars:
+    accessible_ssh_port: "{{ foobar_port | int }}"
+
+  roles:
+    - role: cevich.accessible
+
+  post_tasks:
+    - assert: that='ansible_port == foobar_port'

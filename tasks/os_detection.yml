@@ -14,13 +14,13 @@
 - name: "The accessible_os_name fact is defined from temporary buffer contents"
   set_fact:
     accessible_os_name: '{{ item | regex_replace("^ID=\W*(\w+)\W*", "\1") }}'
-  when: not accessible_os_name | trim | length and item | search('^ID=')
+  when: not accessible_os_name | trim | length and item is search('^ID=')
   with_items: '{{ result }}'
 
 - name: "The accessible_os_version fact is defined from temporary buffer contents"
   set_fact:
     accessible_os_version: '{{ item | regex_replace("^VERSION_ID=\D*([0-9]+).*", "\1") }}'
-  when: not accessible_os_version | trim | length and item | search('^VERSION_ID=')
+  when: not accessible_os_version | trim | length and item is search('^VERSION_ID=')
   with_items: '{{ result }}'
 
 - name: "Both accessible_os_name and accessible_os_version are non-empty"
