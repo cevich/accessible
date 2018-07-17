@@ -3,16 +3,27 @@
 # When successful, this command signals the subject host is ready for further commands
 accessible_cmd: '/bin/true'
 
-# The number of times to retry accessible_cmd before failing subject host
-accessible_retries: 20
+# The number of times to retry open port and accessible_cmd before failing
+# Must be at least 1
+accessible_retries: 10
 
-# The amount of time between retries to wait
-accessible_delay: 5
+# The number of seconds to wait between open-port and accessible_cmd checks
+# Must be at least 13 (two DNS failures + one second)
+accessible_delay: 13
 
-# Table of command(s) that will install ansible dependencies depending on os type and version
-_typ_rhel_deps: 'libselinux-python policycoreutils-python rsync'
-_typ_fed_deps: 'python-simplejson python2-dnf libselinux-python python2-policycoreutils rsync'
-_typ_deb_deps: 'python python-simplejson rsync'
+# A single, or a list of network ports to confirm as open.
+# If a list is given, only one port must open within
+# accessible_retries * accessible_delay seconds
+accessible_ssh_port: "22"
+
+# Inventory host (or "localhost") with network visibility to role-subject host
+accessible_wait_for_delegate: "localhost"
+
+# When true, update the value of ansible_port to first-found open port
+accessible_set_ansible_port: True
+
+# Table of command(s) that will install ansible dependencies depending on OS type and version
+# For special cases, simply override entire dict, only populating ``default`` for a host.
 accessible_ansible_deps:
     default: "python --version"
     rhel:
@@ -29,5 +40,4 @@ accessible_ansible_deps:
         "18": 'apt-get -qq update && apt-get -qq install {{ _typ_deb_deps }}'
 
 # String to use for 'gather_subset' argument to setup module
-accessible_gather_subset: 'network'
-
+accessible_gather_subset: 'min'

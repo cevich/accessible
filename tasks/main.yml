@@ -1,8 +1,11 @@
 ---
 
-- include: accessible.yml
+- include_tasks: accessible.yml
+  when: ansible_connection | trim in accessible_ssh_types
 
-- include: os_detection.yml
+- include_tasks: accessible_test_command.yml
+
+- include_tasks: os_detection.yml
 
 - name: RHEL hosts apply the cevich.subscribed role before installing dependencies
   import_role:

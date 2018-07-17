@@ -1,0 +1,29 @@
+---
+
+all:
+    hosts:
+        subtest: {}
+        centos: {}
+        fedora: {}
+        ubuntu: {}
+        foobar:
+            ansible_host: 127.0.0.1
+            ansible_user: root
+            ansible_ssh_private_key_file: '{{ playbook_dir }}/ssh_private_key'
+            accessible_ssh_port:
+                - 11238
+                - 11236
+                - 11235
+                - "{{ foobar_port | int }}"
+                - 11237
+                - 11234
+    children:
+        containers:
+            hosts:
+                subtest:
+                centos:
+                fedora:
+                ubuntu:
+            vars:
+                ansible_connection: docker
+                ansible_host: "{{ inventory_hostname }}"
