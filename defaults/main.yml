@@ -1,8 +1,5 @@
 ---
 
-# When successful, this command signals the subject host is ready for further commands
-accessible_cmd: '/bin/true'
-
 # The number of times to retry open port and accessible_cmd before failing
 # Must be at least 1
 accessible_retries: 10
@@ -21,6 +18,16 @@ accessible_wait_for_delegate: "localhost"
 
 # When true, update the value of ansible_port to first-found open port
 accessible_set_ansible_port: True
+
+# When successful, this command signals the subject host is ready for further commands
+accessible_cmd: '/bin/true'
+
+# List of ansible connection settings to try with accessible_cmd
+accessible_connection:
+    - {}  # Use defaults
+
+# When true, update host facts for the first successful item from accessible_connection
+accessible_set_connection: True
 
 # Table of command(s) that will install ansible dependencies depending on OS type and version
 # For special cases, simply override entire dict, only populating ``default`` for a host.

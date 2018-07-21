@@ -1,0 +1,9 @@
+---
+
+- include_tasks: 'clear_result.yml'
+
+- name: 'Test command is successful for at least one user'
+  include_tasks: 'try_command.yml'
+  until: result is success
+  retries: '{{ accessible_retries }}'
+  delay: '{{ accessible_delay }}'

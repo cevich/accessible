@@ -1,5 +1,6 @@
 ---
 
-- name: The temporary result fact is empty
+- name: The temporary result and results variables are empty
   set_fact:
     result: ""
+    results: []
