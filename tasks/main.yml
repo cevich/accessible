@@ -1,13 +1,15 @@
 ---
 
 - include_tasks: accessible.yml
-  when: ansible_connection | trim in accessible_ssh_types
+  when: ansible_connection | default('ssh') in accessible_ssh_types
 
-- include_tasks: accessible_test_command.yml
+- include_tasks: clear_result.yml
+
+- include_tasks: test_command.yml
 
 - include_tasks: os_detection.yml
 
-- name: RHEL hosts apply the cevich.subscribed role before installing dependencies
+- name: 'RHEL hosts apply the cevich.subscribed role before installing dependencies'
   import_role:
     name: cevich.subscribed
     private: True
@@ -18,6 +20,6 @@
 
 - include: dependencies.yml
 
-- name: Host facts are re-gathered after dependencies satisfied
+- name: 'Host facts are re-gathered after dependencies satisfied'
   setup:
     gather_subset: '{{ accessible_gather_subset }}'

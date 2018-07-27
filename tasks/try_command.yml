@@ -1,0 +1,19 @@
+---
+
+- name: "Ansible accessability command executes successfully"
+  raw: '{{ accessible_cmd }}'
+  ansible_host: '{{ item.ansible_host | default( ansible_host | default(omit) ) }}'
+  ansible_port: '{{ item.ansible_port | default( ansible_port | default(omit) ) }}'
+  ansible_user: '{{ item.ansible_user | default( ansible_user | default(omit) ) }}'
+  ansible_ssh_private_key_file: '{{ item.ansible_ssh_private_key_file | default(omit) }}'
+  ansible_become: '{{ item.ansible_become | default( ansible_become default(omit) ) }}'
+  failed_when: False  # Don't fail host
+  changed_when: False  # inspection only
+  register: results
+  with_items: '{{ accessible_connection }}'
+
+- name: 'The result buffers the first successful test command'
+  set_fact:
+    result: '{{ item }}'
+  when: item is success
+  with_items: '{{ results }}'
