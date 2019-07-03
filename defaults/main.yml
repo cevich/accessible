@@ -35,9 +35,13 @@ accessible_ansible_deps:
     fedora:
         "27": 'dnf install -y {{ _typ_fed_deps }}'
         "28": 'dnf install -y {{ _typ_fed_deps }}'
+        "29": 'dnf install -y {{ _typ_fed_deps }}'
+        "30": 'dnf install -y {{ _typ_fed_deps }}'
+        "31": 'dnf install -y {{ _typ_fed_deps }}'
     ubuntu:
         "17": 'apt-get -qq update && apt-get -qq install {{ _typ_deb_deps }}'
         "18": 'apt-get -qq update && apt-get -qq install {{ _typ_deb_deps }}'
+        "19": 'apt-get -qq update && apt-get -qq install {{ _typ_deb_deps }}'
 
 # String to use for 'gather_subset' argument to setup module
 accessible_gather_subset: 'min'
