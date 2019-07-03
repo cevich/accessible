@@ -10,7 +10,6 @@
 - name: RHEL hosts apply the cevich.subscribed role before installing dependencies
   import_role:
     name: cevich.subscribed
-    private: True
   when: accessible_os_name == 'rhel' and
         rhsm | default({}, True) | length and
         rhsm.username | default("", True) | trim | length and

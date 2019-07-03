@@ -4,8 +4,10 @@ all:
     hosts:
         subtest: {}
         centos: {}
-        fedora: {}
-        ubuntu: {}
+        fedora:
+            ansible_python_interpreter: 'python3'
+        ubuntu:
+            ansible_python_interpreter: 'python3'
         foobar:
             ansible_host: 127.0.0.1
             ansible_user: root
